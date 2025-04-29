@@ -47,4 +47,20 @@ public class AdminProductService {
 			productRepository.save(product);
 		}
 	}
+
+	public void updateStock(Long productId, int newStock) {
+		Product product = productRepository.findById(productId)
+				.orElseThrow(() -> new RuntimeException("Product not found"));
+		product.setStock(newStock);
+		productRepository.save(product);
+	}
+
+	public void updateEdit(Long productId, String newName, int newPrice) {
+		Product product = productRepository.findById(productId)
+				.orElseThrow(() -> new RuntimeException("Product not found"));
+		product.setName(newName);
+		product.setPrice(BigDecimal.valueOf(newPrice));
+		productRepository.save(product);
+	}
+
 }

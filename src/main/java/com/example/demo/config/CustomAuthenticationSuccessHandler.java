@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         }
 
         if (isAdmin) {
-            response.sendRedirect("/admin_dashboard"); // 管理者用ホーム
+            response.sendRedirect("/admin/products"); // 管理者用ホーム
         } else {
             response.sendRedirect("/home"); // 一般ユーザー用ホーム
         }

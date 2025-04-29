@@ -68,4 +68,23 @@ public class AdminProductController {
 		return "redirect:/admin/products"; // 更新後は管理画面にリダイレクト
 	}
 
+	// 在庫数更新
+	@PostMapping("/{id}/stock")
+	public String updateStock(
+			@PathVariable("id") Long productId,
+			@RequestParam("stock") int newStock) {
+		adminProductService.updateStock(productId, newStock);
+		return "redirect:/admin/products";
+	}
+
+	//商品名、価格更新
+	@PostMapping("/{id}/edit")
+	public String updateEdit(
+			@PathVariable("id") Long productId,
+			@RequestParam("name") String newName,
+			@RequestParam("price") int newPrice) {
+		adminProductService.updateEdit(productId, newName, newPrice);
+		return "redirect:/admin/products";
+	}
+
 }
