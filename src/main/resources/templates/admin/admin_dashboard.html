@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>管理者ダッシュボード</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/js/template.js}"></script>
+</head>
+<body>
+	<h1>管理者ダッシュボード</h1>
+
+	<!-- 商品登録フォーム -->
+	<section>
+		<h2>商品登録</h2>
+		<form th:action="@{/admin/products/add}" method="post">
+			<label>商品名: <input type="text" name="name" required></label><br>
+			<label>価格: <input type="number" name="price" required></label><br>
+			<label>在庫数: <input type="number" name="stock" required></label><br>
+			<button type="submit">登録</button>
+		</form>
+	</section>
+
+	<hr>
+
+	<!-- 商品一覧と削除・在庫更新 -->
+	<section>
+		<h2>商品一覧</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>商品ID</th>
+					<th>商品名</th>
+					<th>価格</th>
+					<th>在庫</th>
+					<th>在庫変更</th>
+					<th>セール価格</th>
+					<th>セール開始日</th>
+					<th>セール終了日</th>
+					<th>セール設定</th>
+					<th>削除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product : ${products}">
+					<td th:text="${product.id}"></td>
+					<td th:text="${product.name}"></td>
+					<td th:text="${product.price}"></td>
+					<td th:text="${product.stock}"></td>
+
+					<!-- 在庫変更フォーム -->
+					<td>
+						<form th:action="@{/admin/products/{id}/stock(id=${product.id})}"
+							method="post">
+							<input type="number" name="stock" min="0" required>
+							<button type="submit">更新</button>
+						</form>
+					</td>
+
+					<!-- セール価格と期間設定フォーム -->
+					<td colspan="3">
+						<form th:action="@{/admin/products/{id}/sale(id=${product.id})}"
+							method="post">
+							<input type="number" name="salePrice" placeholder="セール価格" min="0"
+								required> <input type="date" name="saleStartDate"
+								required> <input type="date" name="saleEndDate" required>
+							<button type="submit">設定</button>
+						</form>
+					</td>
+
+					<!-- 削除ボタン -->
+					<td>
+						<form th:action="@{/admin/products/delete/{id}(id=${product.id})}"
+							method="post">
+							<input type="hidden" name="_method" value="delete" />
+							<button type="submit" th:data-product-name="${product.name}"
+								onclick="return confirmDelete(this)">削除</button>
+						</form>
+					</td>
+				</tr>
+
+				<!-- 商品名・価格編集フォーム -->
+				<tr th:each="product : ${products}">
+					<td colspan="10">
+						<form th:action="@{/admin/products/{id}/edit(id=${product.id})}"
+							method="post">
+							商品名: <input type="text" name="name" th:value="${product.name}"
+								required> 価格: <input type="number" name="price"
+								th:value="${product.price}" required>
+							<button type="submit">更新</button>
+						</form>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</section>
+</body>
+</html>

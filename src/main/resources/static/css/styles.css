@@ -1,0 +1,30 @@
+/* ヘッダー全体のスタイル */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #f8f8f8;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* ヘッダー右上のナビゲーション */
+.header-nav {
+    display: flex;
+    gap: 1em;
+}
+
+.header-nav a {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.header-nav a:hover {
+    background-color: #0056b3;
+}
