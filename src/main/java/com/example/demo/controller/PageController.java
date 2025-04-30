@@ -28,7 +28,7 @@ public class PageController {
 	@GetMapping("/login")
 	public String showLoginForm(Model model) {
 		model.addAttribute("user", new User());
-		return "login"; // resources/templates/login.html を表示
+		return "user_login"; // resources/templates/login.html を表示
 	}
 
 	@GetMapping("/admin_register")

@@ -6,7 +6,8 @@
 </head>
 <body>
 	<h1>管理者登録フォーム</h1>
-	<form th:action="@{/Admin/AddAdminRegister}" th:object="${user}" method="post">
+	<form th:action="@{/Admin/AddAdminRegister}" th:object="${user}"
+		method="post">
 		<label for="email">メールアドレス:</label> <input type="email"
 			th:field="*{email}" required /> <br /> <label for="password">パスワード:</label>
 		<input type="password" th:field="*{password}" required /> <br />

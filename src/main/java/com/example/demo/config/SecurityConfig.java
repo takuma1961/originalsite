@@ -46,6 +46,10 @@ public class SecurityConfig {
 	public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
 		return new CustomAuthenticationSuccessHandler();
 	}
+	@Bean
+	public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
+		return new CustomAuthenticationFailureHandler();
+	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -55,7 +59,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						//.requestMatchers("/admin/**").hasRole("ADMIN") // 管理者専用
 						.requestMatchers("/register", "/login", "/css/**", "/js/**", "/images/**", "/admin_register",
-								"/login_admin","/Admin/AddAdminRegister","/admin/products")
+								"/login_admin","/Admin/AddAdminRegister","/admin/products","/api/**")
 						.permitAll() // これらは一般ユーザーもアクセス可能
 						.anyRequest().authenticated())
 				.exceptionHandling(exception -> exception
@@ -66,8 +70,7 @@ public class SecurityConfig {
 						.usernameParameter("username")
 						.passwordParameter("password")
 						.successHandler(customAuthenticationSuccessHandler()) // ロールで振り分ける
-						.failureUrl("/login?error=true")//login.htmlでログイン
-						.failureUrl("/login_admin?error=true")//login_admin.htmlでログイン
+						.failureHandler(customAuthenticationFailureHandler())//管理者ログイン、ユーザーログインでエラー画面を制御
 						.permitAll())
 				.logout(logout -> logout
 						.logoutUrl("/logout")

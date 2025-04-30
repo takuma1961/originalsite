@@ -55,7 +55,13 @@
 							<button type="submit">更新</button>
 						</form>
 					</td>
-
+					<!-- セール価格・期間の表示 -->
+					<td
+						th:text="${product.salePrice != null ? product.salePrice : '-'}"></td>
+					<td
+						th:text="${product.saleStartDate != null ? product.saleStartDate : '-'}"></td>
+					<td
+						th:text="${product.saleEndDate != null ? product.saleEndDate : '-'}"></td>
 					<!-- セール価格と期間設定フォーム -->
 					<td colspan="3">
 						<form th:action="@{/admin/products/{id}/sale(id=${product.id})}"
