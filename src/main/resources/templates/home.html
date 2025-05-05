@@ -1,59 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>ホーム</title>
-    <link rel="stylesheet" href="/css/styles.css">
+<meta charset="UTF-8">
+<title>ホーム</title>
+<link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>オリジナルブランドECサイトへようこそ</h1>
+	<!-- 共通ヘッダーの読み込み -->
+	<!-- templates/common/header.html -->
+	<div th:replace="common/header :: header"></div>
 
-        <!-- 右上ナビゲーション -->
-        <nav class="header-nav">
-            <a href="/mypage">マイページ</a>
-            <a href="/cart">カート</a>
-        </nav>
-    </header>
+	<main>
+		<!-- サイト紹介 -->
+		<section>
+			<h2>サイト紹介</h2>
+			<p>こちらは独自ブランド商品の販売を行うサイトです。おしゃれで高品質な商品をぜひお楽しみください。</p>
+		</section>
 
-    <main>
-        <!-- サイト紹介 -->
-        <section>
-            <h2>サイト紹介</h2>
-            <p>こちらは独自ブランド商品の販売を行うサイトです。おしゃれで高品質な商品をぜひお楽しみください。</p>
-        </section>
+		<!-- ショッピングリンク -->
+		<section>
+			<h2>ショッピングを始める</h2>
+			<a href="/products" class="btn">商品一覧を見る</a>
+		</section>
+	</main>
 
-        <!-- ショッピングリンク -->
-        <section>
-            <h2>ショッピングを始める</h2>
-            <a href="/products" class="btn">商品一覧を見る</a>
-        </section>
-
-        <!-- 問い合わせ情報 -->
-        <section>
-            <h2>お問い合わせ</h2>
-            <p>ご不明点がございましたら以下の連絡先までお問い合わせください。</p>
-            <ul>
-                <li>メール: info@brand-site.com</li>
-                <li>電話: 123-456-7890</li>
-            </ul>
-        </section>
-
-        <!-- 管理者用リンク（ログイン確認含む） -->
-        <section th:if="${isAdmin}">
-            <h2>管理者用ページ</h2>
-            <a href="/admin/products" class="btn">管理者画面へ移動</a>
-        </section>
-
-        <!-- カートリンク（main内の案内） -->
-        <section>
-            <h2>カート</h2>
-            <a href="/cart" class="btn">カートを見る</a>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 オリジナルブランドECサイト</p>
-    </footer>
+	<footer>
+		<p>&copy; 2025 オリジナルブランドECサイト</p>
+	</footer>
 </body>
 </html>

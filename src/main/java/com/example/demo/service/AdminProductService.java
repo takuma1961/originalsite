@@ -55,12 +55,21 @@ public class AdminProductService {
 		productRepository.save(product);
 	}
 
-	public void updateEdit(Long productId, String newName, int newPrice) {
-		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new RuntimeException("Product not found"));
-		product.setName(newName);
-		product.setPrice(BigDecimal.valueOf(newPrice));
-		productRepository.save(product);
+	//	public void updateEdit(Long productId, String newName, int newPrice) {
+	//		Product product = productRepository.findById(productId)
+	//				.orElseThrow(() -> new RuntimeException("Product not found"));
+	//		product.setName(newName);
+	//		product.setPrice(BigDecimal.valueOf(newPrice));
+	//		productRepository.save(product);
+	//	}
+
+	public void updateImagepath(Long id, String imagePath) {
+		Optional<Product> optional = productRepository.findById(id);
+		if (optional.isPresent()) {
+			Product product = optional.get();
+			product.setImageUrl(imagePath); // nullでもOK
+			productRepository.save(product);
+		}
 	}
 
 }

@@ -22,21 +22,23 @@
 
 	<hr>
 
-	<!-- 商品一覧と削除・在庫更新 -->
+	<!-- 商品一覧と操作 -->
 	<section>
 		<h2>商品一覧</h2>
 		<table border="1">
 			<thead>
 				<tr>
-					<th>商品ID</th>
-					<th>商品名</th>
+					<th>ID</th>
+					<th>名前</th>
 					<th>価格</th>
 					<th>在庫</th>
-					<th>在庫変更</th>
+					<th>画像パス</th>
+					<th>在庫更新</th>
 					<th>セール価格</th>
-					<th>セール開始日</th>
-					<th>セール終了日</th>
+					<th>開始日</th>
+					<th>終了日</th>
 					<th>セール設定</th>
+					<th>画像パス更新</th>
 					<th>削除</th>
 				</tr>
 			</thead>
@@ -46,8 +48,9 @@
 					<td th:text="${product.name}"></td>
 					<td th:text="${product.price}"></td>
 					<td th:text="${product.stock}"></td>
+					<td th:text="${product.imageUrl}"></td>
 
-					<!-- 在庫変更フォーム -->
+					<!-- 在庫数更新フォーム -->
 					<td>
 						<form th:action="@{/admin/products/{id}/stock(id=${product.id})}"
 							method="post">
@@ -55,6 +58,7 @@
 							<button type="submit">更新</button>
 						</form>
 					</td>
+
 					<!-- セール価格・期間の表示 -->
 					<td
 						th:text="${product.salePrice != null ? product.salePrice : '-'}"></td>
@@ -62,14 +66,26 @@
 						th:text="${product.saleStartDate != null ? product.saleStartDate : '-'}"></td>
 					<td
 						th:text="${product.saleEndDate != null ? product.saleEndDate : '-'}"></td>
-					<!-- セール価格と期間設定フォーム -->
-					<td colspan="3">
+
+					<!-- セール設定フォーム -->
+					<td>
 						<form th:action="@{/admin/products/{id}/sale(id=${product.id})}"
 							method="post">
 							<input type="number" name="salePrice" placeholder="セール価格" min="0"
 								required> <input type="date" name="saleStartDate"
 								required> <input type="date" name="saleEndDate" required>
 							<button type="submit">設定</button>
+						</form>
+					</td>
+
+					<!-- 画像パス更新フォーム -->
+					<td>
+						<form th:action="@{/admin/products/{id}/edit(id=${product.id})}"
+							method="post">
+							<input type="text" name="imageUrl" th:value="${product.imageUrl}">
+							<input type="hidden" name="name" th:value="${product.name}" /> <input
+								type="hidden" name="price" th:value="${product.price}" />
+							<button type="submit">画像更新</button>
 						</form>
 					</td>
 
@@ -83,20 +99,6 @@
 						</form>
 					</td>
 				</tr>
-
-				<!-- 商品名・価格編集フォーム -->
-				<tr th:each="product : ${products}">
-					<td colspan="10">
-						<form th:action="@{/admin/products/{id}/edit(id=${product.id})}"
-							method="post">
-							商品名: <input type="text" name="name" th:value="${product.name}"
-								required> 価格: <input type="number" name="price"
-								th:value="${product.price}" required>
-							<button type="submit">更新</button>
-						</form>
-					</td>
-				</tr>
-
 			</tbody>
 		</table>
 	</section>

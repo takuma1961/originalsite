@@ -2,10 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <script src="/JS/template.js"></script>
+<link rel="stylesheet" href="/css/styles.css">
 <meta charset="UTF-8">
 <title>カート</title>
 </head>
 <body>
+
+	<!-- 共通ヘッダーの読み込み -->
+	<!-- templates/common/header.html -->
+	<div th:replace="common/header :: header"></div>
+	<h1>カート</h1>
+
+
 	<h1>カート内容</h1>
 	<a href="/products">← 商品一覧へ戻る</a>
 

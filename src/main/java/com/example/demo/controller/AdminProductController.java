@@ -33,7 +33,7 @@ public class AdminProductController {
 		} else {
 			model.addAttribute("products", products);
 		}
-		return "/admin/admin_dashboard"; // 商品管理画面に移動
+		return "admin/admin_dashboard"; // 商品管理画面に移動
 	}
 
 	//商品追加
@@ -77,13 +77,20 @@ public class AdminProductController {
 		return "redirect:/admin/products";
 	}
 
-	//商品名、価格更新
+	//	//商品名、価格更新
+	//	@PostMapping("/{id}/edit")
+	//	public String updateEdit(
+	//			@PathVariable("id") Long productId,
+	//			@RequestParam("name") String newName,
+	//			@RequestParam("price") int newPrice) {
+	//		adminProductService.updateEdit(productId, newName, newPrice);
+	//		return "redirect:/admin/products";
+	//	}
+
 	@PostMapping("/{id}/edit")
-	public String updateEdit(
-			@PathVariable("id") Long productId,
-			@RequestParam("name") String newName,
-			@RequestParam("price") int newPrice) {
-		adminProductService.updateEdit(productId, newName, newPrice);
+	public String updateProductInfo(@PathVariable Long id,
+			@RequestParam(required = false) String imageUrl) {
+		adminProductService.updateImagepath(id,imageUrl);
 		return "redirect:/admin/products";
 	}
 

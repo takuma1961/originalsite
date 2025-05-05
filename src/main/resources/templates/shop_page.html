@@ -6,15 +6,19 @@
 <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-	<header>
-		<h1>商品一覧</h1>
-		<a href="/home">ホームへ戻る</a>
-	</header>
+	<!-- 共通ヘッダーの読み込み -->
+	<!-- templates/common/header.html -->
+	<div th:replace="common/header :: header"></div>
+	<h1>商品一覧</h1>
 
 	<main>
 		<section>
 			<div th:each="product : ${products}" class="product-card">
 				<h2 th:text="${product.name}">商品名</h2>
+				<!-- 商品画像 -->
+				<img th:src="@{${product.imageUrl}}" alt="商品画像"
+					class="product-image" />
+
 
 				<p>
 					<span th:if="${product.isOnSale()}"> <span class="old-price"
