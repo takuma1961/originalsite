@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src="/JS/template.js"></script>
+<meta charset="UTF-8">
+<title>カート</title>
+</head>
+<body>
+	<h1>カート内容</h1>
+	<a href="/products">← 商品一覧へ戻る</a>
+
+	<form th:action="@{/cart/update}" method="post">
+		<table border="1">
+			<tr>
+				<th>商品名</th>
+				<th>価格</th>
+				<th>数量</th>
+				<th>小計</th>
+				<th>操作</th>
+			</tr>
+			<tr th:each="item, iterStat : ${cartItems}">
+				<td th:text="${item.product.name}"></td>
+				<td
+					th:text="${item.product.isOnSale()} ? ${item.product.salePrice} : ${item.product.price}"></td>
+				<td><input type="number" name="quantities"
+					th:value="${item.quantity}" min="1" /> <input type="hidden"
+					name="cartItemIds" th:value="${item.id}" /></td>
+				<td
+					th:text="${(item.product.isOnSale() ? item.product.salePrice : item.product.price) * item.quantity}"></td>
+				<td>
+					<button type="button"
+						th:onclick="'deleteCartItem(' + ${item.id} + ')'">削除</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3"><strong>合計金額</strong></td>
+				<td th:text="${totalPrice}"></td>
+				<td></td>
+			</tr>
+		</table>
+		<button type="submit">数量を更新</button>
+	</form>
+</body>
+</html>

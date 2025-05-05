@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品一覧</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+	<header>
+		<h1>商品一覧</h1>
+		<a href="/home">ホームへ戻る</a>
+	</header>
+
+	<main>
+		<section>
+			<div th:each="product : ${products}" class="product-card">
+				<h2 th:text="${product.name}">商品名</h2>
+
+				<p>
+					<span th:if="${product.isOnSale()}"> <span class="old-price"
+						th:text="'¥' + ${product.price}"></span> <span class="sale-price"
+						th:text="'¥' + ${product.salePrice}"></span>
+					</span> <span th:unless="${product.isOnSale()}"
+						th:text="'¥' + ${product.price}"></span>
+				</p>
+
+				<p th:text="'在庫数: ' + ${product.stock}">在庫</p>
+
+				<form th:action="@{/cart/add}" method="post">
+					<input type="hidden" name="productId" th:value="${product.id}" />
+
+					<!-- 数量を入力（1以上、在庫以下を制限） -->
+					<label> 数量: <input type="number" name="quantity" min="1"
+						th:attr="max=${product.stock}" value="1" required />
+					</label>
+
+					<button type="submit">カートに追加</button>
+				</form>
+
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; 2025 オリジナルブランドECサイト</p>
+	</footer>
+</body>
+</html>

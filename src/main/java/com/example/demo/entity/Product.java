@@ -43,6 +43,16 @@ public class Product {
 	private LocalDate saleStartDate;
 	private LocalDate saleEndDate;
 
+	//セール情報sale_pageに表示する制御メソッド
+	public boolean isOnSale() {
+		if (salePrice == null || saleStartDate == null || saleEndDate == null) {
+			return false;
+		}
+		LocalDate today = LocalDate.now();
+		return (today.isEqual(saleStartDate) || today.isAfter(saleStartDate)) &&
+				(today.isEqual(saleEndDate) || today.isBefore(saleEndDate));
+	}
+
 	@PrePersist
 	protected void onCreate() {
 		createdAt = LocalDateTime.now();
