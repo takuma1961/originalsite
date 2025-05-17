@@ -48,5 +48,10 @@
 		</table>
 		<button type="submit">数量を更新</button>
 	</form>
+	<!-- 購入ボタンフォーム -->
+	<form th:action="@{/order/checkout}" method="post"
+		style="margin-top: 20px;">
+		<button type="submit">購入する</button>
+	</form>
 </body>
 </html>
