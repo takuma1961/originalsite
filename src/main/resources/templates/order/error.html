@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注文エラー</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+	<!-- 共通ヘッダー -->
+	<div th:replace="common/header :: header"></div>
+
+	<h1>注文エラー</h1>
+	<p th:text="${error}">注文処理中にエラーが発生しました。</p>
+
+	<a href="/cart">カートに戻る</a>
+
+</body>
+</html>

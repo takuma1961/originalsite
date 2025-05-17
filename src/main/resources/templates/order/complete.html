@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注文完了</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+	<!-- 共通ヘッダー -->
+	<div th:replace="common/header :: header"></div>
+
+	<h1>注文完了</h1>
+	<p th:text="${message}">注文が正常に完了しました。</p>
+
+	<a href="/products">商品一覧に戻る</a>
+
+</body>
+</html>

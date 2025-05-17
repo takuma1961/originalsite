@@ -60,7 +60,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/admin/**").hasRole("ADMIN") // 管理者専用
 						.requestMatchers("/register", "/login", "/css/**", "/js/**", "/images/**", "/admin_register",
-								"/login_admin", "/Admin/AddAdminRegister", "/admin/products", "/api/**", "/products")
+								"/login_admin", "/Admin/AddAdminRegister", "/admin/products", "/api/**", "/products","/order/**")
 						.permitAll() // これらは一般ユーザーもアクセス可能
 						.anyRequest().authenticated())
 				.exceptionHandling(exception -> exception

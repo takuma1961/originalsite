@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.service.CustomUserDetails;
@@ -16,6 +17,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
+	@PostMapping("/checkout")
 	public String checkout(@AuthenticationPrincipal UserDetails userDetails, Model model) {
 
 		try {
